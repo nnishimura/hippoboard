@@ -1,0 +1,19 @@
+#########################################################
+# Wordpress on Amazon Linux LEMP
+#########################################################
+
+---
+- hosts: all
+  roles:
+    - common
+
+- hosts: web
+  roles:
+    - php
+    - nginx
+    - ssl
+    - mysql
+    - wordpress
+    - deploy
+    - mackerelio.mackerel-agent
+    - mackerel-agent

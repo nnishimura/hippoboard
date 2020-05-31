@@ -1,0 +1,18 @@
+apikey = "{{ mackerel_apikey }}"
+display_name = "nnishimura-web"
+
+roles = [
+  "nnishimura:web_server",
+]
+
+[plugin.checks.uptime]
+command = "/usr/bin/mackerel-plugin-uptime"
+
+[plugin.metrics.mysql]
+command = "/usr/bin/mackerel-plugin-mysql -host=127.0.0.1 -port=3306 -username=root -password={{ mysql_root_password }}"
+
+[plugin.metrics.nginx]
+command = "/usr/bin/mackerel-plugin-nginx"
+
+[plugin.metrics.php-fpm]
+command = "/usr/bin/mackerel-plugin-php-fpm -url http://localhost:8080/status?json"

@@ -1,0 +1,4 @@
+account_email: "naoko.nishimura1018@gmail.com"
+cert_dir: "/etc/ssl/{{ http_host }}"
+account_key_dir: /etc/ssl/lets_encrypt
+zone_name: nnishimura.work

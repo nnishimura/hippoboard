@@ -1,0 +1,1 @@
+php_modules: [ 'php', 'php-pdo', 'php-mysqlnd', 'php-fpm', 'php-json', 'php-bcmath', 'php-mbstring', 'php-xml', 'php-curl', 'php-ldap', 'php-mysqlnd' ]

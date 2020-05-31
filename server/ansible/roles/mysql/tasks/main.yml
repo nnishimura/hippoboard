@@ -1,0 +1,49 @@
+---
+- name: Install mysql rpm
+  yum:
+    name: "{{ mysql_version }}"
+    state: present
+
+- name: Install mysql modules
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ mysql_modules }}"
+
+- name: Ensure mysql is started
+  service:
+    name: mysqld
+    state: started
+    enabled: true
+
+- name: Check if root password is set
+  shell: >
+    mysqladmin -u root status -p'{{ mysql_root_password }}'
+  changed_when: false
+  failed_when: false
+  register: root_check_pwd
+
+- name: Get default root password
+  shell: cat /var/log/mysqld.log | grep 'temporary password' | awk '{print $13}'
+  register: mysql_default_password
+  no_log: true
+
+- name: Set new root password
+  shell: mysql -u root -p'{{ mysql_default_password.stdout_lines[0] }}' --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '{{ mysql_root_password }}';"
+  when: root_check_pwd is not skipped and root_check_pwd.rc == 1
+
+- name: Create database for WordPress
+  mysql_db:
+    name: "{{ mysql_db }}"
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+
+- name: Create MySQL user for WordPress
+  mysql_user:
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_password }}"
+    priv: "{{ mysql_db }}.*:ALL"
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"

@@ -1,0 +1,41 @@
+worker_processes  auto;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    sendfile        on;
+    keepalive_timeout  65;
+
+    server {
+      listen 8080;
+      server_name localhost;
+
+      location /nginx_status {
+          stub_status on;
+          access_log off;
+          allow 127.0.0.1;
+          deny all;
+      }
+
+      location /status {
+          fastcgi_pass unix:/var/run/php-fpm/www.sock;
+          fastcgi_index index.php;
+          fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+          include fastcgi_params;
+          fastcgi_buffers 256 128k;
+          fastcgi_buffer_size 128k;
+          fastcgi_intercept_errors on;
+          fastcgi_read_timeout 120s;
+          access_log off;
+          allow 127.0.0.1;
+          deny all;
+      }
+    }
+
+    include       /etc/nginx/conf.d/*.conf;
+}
