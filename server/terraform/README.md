@@ -32,7 +32,7 @@ terraform apply
 
 Run ansible playbook in `/aws_wordpress`. Make sure to update `hosts` with the new IP / private key path too.
 
-wordpress should be running at https://www.nnishimura.work/ now :tada:
+wordpress should be running at https://www.hippoboard.work/ now :tada:
 
 ## Reference
 

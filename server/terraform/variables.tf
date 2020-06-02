@@ -1,6 +1,6 @@
 ## Common
 variable "profile" {
-  default = "menta_tf"
+  default = "terraformer"
 }
 
 variable "region" {
@@ -17,11 +17,11 @@ variable "instance_type" {
 }
 
 variable "public_key_path" {
-  default = "~/.ssh/menta_circleci.pub"
+  default = "~/.ssh/hippoboard_rsa.pub"
 }
 
 ## Route53
 ## Reusing existing zone
 variable "zone_id" {
-  default = "Z0597982TW16OHE8DL8Y"
+  default = "Z0026843AO1RRE3VVSTC"
 }

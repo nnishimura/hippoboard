@@ -1,6 +1,6 @@
 # AWS Wordpress server
 
-URL：https://www.nnishimura.work/
+URL：https://www.hippoboard.work/
 
 ## Getting Started
 ### 1. VPC(Virtual Private Cloud)の設定
@@ -40,7 +40,7 @@ VPC > Elastic IPs > Allocate New AddressからEIPを追加する。これをさ�
 * A recordに先ほどのEIPを設定
 ![53](https://user-images.githubusercontent.com/6326478/81143402-bca07280-8fac-11ea-919d-a1605a278cf9.png)
 
-* この時点で http://www.nnishimura.work にwelcome pageが見えるはず。残りのSSL化 & WP設定はansibleでやります−
+* この時点で http://www.hippoboard.work にwelcome pageが見えるはず。残りのSSL化 & WP設定はansibleでやります−
 
 ## Provisioning
 ### 準備
@@ -66,7 +66,7 @@ ansible-playbook -i hosts playbook.yml --ask-vault-pass
 ```
 passwordは`ansible-vault`で先ほど設定したやつを使う
 
-これで、https://www.nnishimura.work/ にWordpressが設置できました :tada: :tada:
+これで、https://www.hippoboard.work/ にWordpressが設置できました :tada: :tada:
 
 ## Reference
 ### EC2 + VPC settings

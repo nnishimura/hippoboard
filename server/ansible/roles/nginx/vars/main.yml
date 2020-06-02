@@ -1,5 +1,5 @@
 remote_web_user: "nginx"
-main_host: "www.nnishimura.work"
+main_host: "www.hippoboard.work"
 sub_host: "static.nnishimura.work"
-http_host: "www.nnishimura.work"
-http_conf: "www.nnishimura.work.conf"
+http_host: "www.hippoboard.work"
+http_conf: "www.hippoboard.work.conf"

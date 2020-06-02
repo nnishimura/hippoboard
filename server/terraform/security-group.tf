@@ -1,11 +1,18 @@
-resource "aws_security_group" "menta-sg" {
-  name        = "menta-sg"
-  description = "menta-sg"
-  vpc_id      = aws_vpc.vpc-menta.id
+resource "aws_security_group" "hippoboard-sg" {
+  name        = "hippoboard-sg"
+  description = "hippoboard-sg"
+  vpc_id      = aws_vpc.vpc-hippoboard.id
 
   ingress {
     from_port   = 80
     to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 8000
+    to_port     = 8000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -32,6 +39,6 @@ resource "aws_security_group" "menta-sg" {
   }
 
   tags = {
-    Name = "menta-sg"
+    Name = "hippoboard-sg"
   }
 }

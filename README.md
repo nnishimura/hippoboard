@@ -6,3 +6,4 @@ W2: as a user, I can create a task (both api/ui). Research for the best structur
 W3: remaining UIs, finish up
 
 Due: June 25th
+https://www.gv.com/sprint/
