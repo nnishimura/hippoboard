@@ -1,2 +1,2 @@
 [web]
-www.hippoboard.work ansible_host=54.150.194.104 ansible_port=22 ansible_user='ec2-user' ansible_ssh_private_key_file='~/.ssh/menta_circleci.pem'
+www.hippoboard.work ansible_host=54.248.23.249 ansible_port=22 ansible_user='ec2-user' ansible_ssh_private_key_file='~/.ssh/hippoboard_rsa.pem'

@@ -1,0 +1,22 @@
+---
+- name: Install postgres rpm
+  command: amazon-linux-extras install postgresql10 -y
+  ignore_errors: true
+
+- name: Install postgres modules
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - postgresql-server
+    - postgresql-devel
+
+- name: Initial setup
+  shell: /usr/bin/postgresql-setup –-initdb
+  ignore_errors: true
+
+- name: Ensure postgres is started
+  service:
+    name: postgresql
+    state: started
+    enabled: true

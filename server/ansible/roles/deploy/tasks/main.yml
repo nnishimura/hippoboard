@@ -4,42 +4,30 @@
     src: "roles/deploy/files/deploy.sh"
     dest: "/etc/deploy.sh"
 
-- name: Create SSH key for github access
-  openssh_keypair:
-    path: /root/.ssh/id_github_rsa
-
-- name: Read SSH public key to authorize
-  shell: cat /root/.ssh/id_github_rsa.pub
-  register: ssh_pub_key
-
-- debug:
-    msg: Go to github settings and register id_github_rsa.pub. This needs to be done manually
-
 - name: Create the docroot
   file:
-    path: "/var/www/{{ sub_host }}"
+    path: "/var/www/{{ http_host }}"
     state: directory
     mode: 0755
 
 - name: Clone the code repository to the docroot
   git:
     repo: "{{ git_repo }}"
-    dest: "/var/www/{{ sub_host }}"
+    dest: "/var/www/{{ http_host }}"
     accept_hostkey: yes
-    key_file: /root/.ssh/id_github_rsa
   ignore_errors: true
 
 - name: Set ownership
   file:
-    path: "/var/www/{{ sub_host }}"
+    path: "/var/www/{{ http_host }}"
     state: directory
     recurse: yes
     owner: "{{ remote_web_user }}"
     group: "{{ remote_web_user }}"
 
 - name: Set permissions for directories
-  shell: "find /var/www/{{ sub_host }}/ -type d -exec chmod 750 {} \\;"
+  shell: "find /var/www/{{ http_host }}/ -type d -exec chmod 750 {} \\;"
 
 - name: Set permissions for files
-  shell: "find /var/www/{{ sub_host }}/ -type f -exec chmod 640 {} \\;"
+  shell: "find /var/www/{{ http_host }}/ -type f -exec chmod 640 {} \\;"
   notify: restart nginx

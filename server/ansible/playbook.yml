@@ -9,11 +9,6 @@
 
 - hosts: web
   roles:
-    - php
     - nginx
-    - ssl
-    - mysql
-    - wordpress
+    - postgres
     - deploy
-    - mackerelio.mackerel-agent
-    - mackerel-agent
