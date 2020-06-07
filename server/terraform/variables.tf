@@ -7,6 +7,10 @@ variable "region" {
   default = "ap-northeast-1"
 }
 
+variable "app_name" {
+  default = "hippoboard"
+}
+
 ## EC2
 variable "ami" {
   default = "ami-0f310fced6141e627"

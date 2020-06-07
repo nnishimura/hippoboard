@@ -1,20 +1,57 @@
 version: 2.1
 
-jobs:
-  deploy:
-    machine:
-      enabled: true
+orbs:
+  aws-s3: circleci/aws-s3@1.0.11
+
+executors:
+  default:
+    docker:
+      - image: circleci/node:10
+      - image: circleci/python:2.7
+
+commands:
+  npm_install:
+    working_directory: ~/ui
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "99:e2:bd:ed:c9:11:13:a2:5b:0f:7f:bd:5f:e4:af:ff"
-      - run: ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "sudo /etc/deploy.sh"
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install npm
+          command: yarn install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+              - node_modules
+
+jobs:
+  build:
+    executor: default
+    steps:
+      - checkout
+      - npm_install
+
+  deploy:
+    executor: default
+    working_directory: ~/ui
+    steps:
+      - checkout
+      - npm_install
+      - run:
+          name: build
+          command: npm run build
+      - aws-s3/sync:
+          from: dist/hippoboard
+          to: s3://hippoboard
+          overwrite: true
 
 workflows:
   version: 2
-  deploy:
+  continuous-deploy:
     jobs:
+      - build
       - deploy:
+          requires:
+            - build
           filters:
             branches:
-              only: master
+              only: test-deploy
