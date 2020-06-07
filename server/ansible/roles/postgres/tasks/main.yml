@@ -12,8 +12,23 @@
     - postgresql-devel
 
 - name: Initial setup
-  shell: /usr/bin/postgresql-setup –-initdb
-  ignore_errors: true
+  shell: /usr/bin/postgresql-setup initdb
+  args:
+    creates: /var/lib/pgsql/data/postgresql.conf
+
+- name: Ensure database is created
+  become_user: postgres
+  postgresql_db:
+    name: hippoboard
+    encoding: UTF-8
+
+- name: Ensure PostgreSQL users are present
+  become_user: postgres
+  postgresql_user:
+    db: hippoboard
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+    priv: ALL
 
 - name: Ensure postgres is started
   service:

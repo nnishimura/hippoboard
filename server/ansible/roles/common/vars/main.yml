@@ -1,1 +1,1 @@
-system_modules: [ 'git', 'wget', 'vim' ]
+system_modules: [ 'git', 'wget', 'vim', 'python-psycopg2' ]

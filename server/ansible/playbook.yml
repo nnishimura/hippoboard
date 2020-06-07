@@ -12,3 +12,6 @@
     - nginx
     - postgres
     - deploy
+    -
+      role: go
+      tags: go

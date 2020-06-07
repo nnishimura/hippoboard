@@ -1,0 +1,11 @@
+version: "3"
+services:
+  db:
+    image: "postgres:10"
+    container_name: "postgres"
+    ports:
+      - "54320:5432"
+    volumes:
+      - hippoboard_db_vm:/var/lib/postgresql/data
+volumes:
+  hippoboard_db_vm:

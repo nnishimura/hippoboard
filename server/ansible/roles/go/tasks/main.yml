@@ -1,9 +1,39 @@
 ---
-- name: Install Nginx
-  command: amazon-linux-extras install golang1.11 -y
-  ignore_errors: true
+- name: Download and unpack latest golang
+  unarchive:
+    src: https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz
+    dest: "/usr/local"
+    remote_src: yes
 
 - name: Add golang app as systemd
   template:
     src: roles/go/files/hippoboard_api.service.j2
     dest: /usr/lib/systemd/system/hippoboard_api.service
+
+- name: Add the Go bin directory to the PATH environment variable for all users
+  copy:
+    src: roles/go/files/go-bin.sh
+    dest: /etc/profile.d
+
+- name: Set GOPATH for all users
+  template:
+    src: roles/go/files/go-path.sh.j2
+    dest: /etc/profile.d
+
+- name: Install go packages
+  command: "go get -u {{ item }}"
+  args:
+    chdir: "/var/www/{{ http_host }}/api"
+  loop:
+    - "github.com/gin-gonic/gin"
+
+- name: Build go app
+  command: go build
+  args:
+    chdir: "/var/www/{{ http_host }}/api"
+
+- name: Ensure hippoboard_api is started
+  service:
+    name: hippoboard_api
+    state: started
+    enabled: true

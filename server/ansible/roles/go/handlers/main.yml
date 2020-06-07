@@ -1,5 +1,5 @@
 ---
-- name: restart nginx
+- name: restart hippoboard_api
   service:
-    name: nginx
+    name: hippoboard_api
     state: restarted

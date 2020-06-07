@@ -1,4 +1,0 @@
-remote_web_user: "nginx"
-main_host: "api.hippoboard.work"
-http_host: "api.hippoboard.work"
-http_conf: "api.hippoboard.work.conf"

@@ -28,7 +28,6 @@
     src: "roles/nginx/files/{{ item }}.j2"
     dest: "/etc/nginx/conf.d/{{ item }}"
   loop:
-    - "{{ main_host }}.conf"
+    - "{{ http_host }}.conf"
   notify:
     - restart nginx
-    - restart php

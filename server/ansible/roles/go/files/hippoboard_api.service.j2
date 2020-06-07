@@ -1,9 +1,10 @@
-[program:hippoboard]
-directory=/var/www/api.hippoboard.work
-command=/root/gocode/src/github.com/monirz/myapp/myapp
-autostart=true
-autorestart=true
-stderr_logfile=/var/log/myapp.err
-stdout_logfile=/var/log/myapp.log
-environment=CODENATION_ENV=prod
-environment=GOPATH="/var/www/api.hippoboard.work"
+[Unit]
+Description=Go REST API Server
+
+[Service]
+ExecStart=/var/www/{{ http_host }}/api/api
+WorkingDirectory=/var/www/{{ http_host }}/api
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

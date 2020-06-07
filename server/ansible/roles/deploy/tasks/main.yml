@@ -15,7 +15,6 @@
     repo: "{{ git_repo }}"
     dest: "/var/www/{{ http_host }}"
     accept_hostkey: yes
-  ignore_errors: true
 
 - name: Set ownership
   file:
