@@ -10,10 +10,19 @@
     state: directory
     mode: 0755
 
+- name: Create SSH key for github access
+  openssh_keypair:
+    path: /root/.ssh/id_github_rsa
+
+- name: Read SSH public key to authorize
+  shell: cat /root/.ssh/id_github_rsa.pub
+  register: ssh_pub_key
+
 - name: Clone the code repository to the docroot
   git:
-    repo: "{{ git_repo }}"
+    repo: git@github.com:nnishimura/hippoboard.git
     dest: "/var/www/{{ http_host }}"
+    key_file: /root/.ssh/id_github_rsa
     accept_hostkey: yes
 
 - name: Set ownership
