@@ -11,30 +11,32 @@ executors:
 
 commands:
   npm_install:
-    working_directory: ~/ui
     steps:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: install npm
-          command: yarn install
+          command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
-              - node_modules
+              - ./node_modules
 
 jobs:
   build:
     executor: default
+    working_directory: ~/hippoboard/ui
     steps:
-      - checkout
+      - checkout:
+          path: ~/hippoboard
       - npm_install
 
   deploy:
     executor: default
-    working_directory: ~/ui
+    working_directory: ~/project/ui
     steps:
-      - checkout
+      - checkout:
+          path: ~/hippoboard
       - npm_install
       - run:
           name: build

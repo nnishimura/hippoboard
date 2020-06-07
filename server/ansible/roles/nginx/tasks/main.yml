@@ -29,7 +29,6 @@
     dest: "/etc/nginx/conf.d/{{ item }}"
   loop:
     - "{{ main_host }}.conf"
-    - "{{ sub_host }}.conf"
   notify:
     - restart nginx
     - restart php

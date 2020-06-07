@@ -1,0 +1,9 @@
+[program:hippoboard]
+directory=/var/www/api.hippoboard.work
+command=/root/gocode/src/github.com/monirz/myapp/myapp
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/myapp.err
+stdout_logfile=/var/log/myapp.log
+environment=CODENATION_ENV=prod
+environment=GOPATH="/var/www/api.hippoboard.work"

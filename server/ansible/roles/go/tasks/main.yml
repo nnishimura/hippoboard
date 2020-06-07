@@ -1,0 +1,9 @@
+---
+- name: Install Nginx
+  command: amazon-linux-extras install golang1.11 -y
+  ignore_errors: true
+
+- name: Add golang app as systemd
+  template:
+    src: roles/go/files/hippoboard_api.service.j2
+    dest: /usr/lib/systemd/system/hippoboard_api.service
