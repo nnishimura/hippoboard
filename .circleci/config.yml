@@ -23,7 +23,7 @@ commands:
               - ./node_modules
 
 jobs:
-  build:
+  build-ui:
     executor: default
     working_directory: ~/hippoboard/ui
     steps:
@@ -31,9 +31,9 @@ jobs:
           path: ~/hippoboard
       - npm_install
 
-  deploy:
+  deploy-ui:
     executor: default
-    working_directory: ~/project/ui
+    working_directory: ~/hippoboard/ui
     steps:
       - checkout:
           path: ~/hippoboard
@@ -46,14 +46,27 @@ jobs:
           to: s3://hippoboard
           overwrite: true
 
+  deploy-api:
+    machine:
+      enabled: true
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "5d:f9:31:cf:df:f3:65:55:56:2b:d8:d8:04:50:e3:d0"
+      - run: ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "sudo /etc/deploy.sh"
+
 workflows:
   version: 2
   continuous-deploy:
     jobs:
-      - build
-      - deploy:
+      - build-ui
+      - deploy-ui:
           requires:
-            - build
+            - build-ui
+          filters:
+            branches:
+              only: test-deploy
+      - deploy-api:
           filters:
             branches:
               only: test-deploy
