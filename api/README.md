@@ -10,10 +10,16 @@ Follow [this guide](https://medium.com/@star_zero/gvm%E3%81%A7-gopath%E7%AE%A1%E
 gvm pkgset use hippoboard
 ```
 
-start postgres container.
+start nginx/postgres container.
 
 ```
 docker-compose up
+```
+
+## Build
+
+```
+go build
 ```
 
 ## Reference
