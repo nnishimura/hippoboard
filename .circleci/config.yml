@@ -65,8 +65,8 @@ workflows:
             - build-ui
           filters:
             branches:
-              only: test-deploy
+              only: master
       - deploy-api:
           filters:
             branches:
-              only: test-deploy
+              only: master
