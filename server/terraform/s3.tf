@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "hippoboard" {
+resource "aws_s3_bucket" "hippoboard_web" {
   bucket = var.app_name
   acl    = "public-read"
   website {

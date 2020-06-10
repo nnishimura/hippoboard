@@ -8,7 +8,7 @@ variable "region" {
 }
 
 variable "app_name" {
-  default = "hippoboard"
+  default = "www.hippoboard.work"
 }
 
 ## EC2

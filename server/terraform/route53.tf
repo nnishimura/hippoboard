@@ -1,11 +1,11 @@
 resource "aws_route53_record" "hippoboard-web" {
   zone_id = var.zone_id
-  name = "www.hippoboard.work"
+  name = var.app_name
   type = "A"
 
   alias {
-    name = aws_s3_bucket.hippoboard.website_domain
-    zone_id = aws_s3_bucket.hippoboard.hosted_zone_id
+    name = aws_s3_bucket.hippoboard_web.website_domain
+    zone_id = aws_s3_bucket.hippoboard_web.hosted_zone_id
     evaluate_target_health = true
   }
 }

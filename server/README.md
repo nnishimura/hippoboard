@@ -1,3 +1,6 @@
 # hippoboard-server
 
-Ansible playbooks for configuring hippoboard frontend and api.
+| | |
+|-|-|
+| /ansible     | Ansible playbook for EC2             |
+| /terraform    | Terraform for configuring UI/API aws servers     |
