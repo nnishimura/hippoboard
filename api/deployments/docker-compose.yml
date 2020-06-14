@@ -1,0 +1,28 @@
+version: "3"
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+    environment:
+      DB_HOST: "localhost"
+      DB_NAME: "hippoboard"
+      DB_USER: "hippoboard"
+      DB_PASSWORD: "hippoboard"
+      DB_PORT: 5432
+  db:
+    image: "postgres:10"
+    container_name: "postgres"
+    ports:
+      - "54320:5432"
+    volumes:
+      - hippoboard_db_vm:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: "hippoboard"
+      POSTGRES_USER: "hippoboard"
+      POSTGRES_PASSWORD: "hippoboard"
+volumes:
+  hippoboard_db_vm:

@@ -1,2 +1,14 @@
+# Terraform
 .terraform
 *.tfstate*
+
+# Golang
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+vendor/
+cmd/

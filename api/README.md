@@ -1,6 +1,6 @@
 # hippoboard-api
 
-Golang API for hippoboard.
+Golang REST API for hippoboard.
 
 ## Getting Started
 
@@ -16,10 +16,25 @@ start nginx/postgres container.
 docker-compose up
 ```
 
+Install dependencies
+
+```
+go get
+```
+
 ## Build
 
 ```
-go build
+cd app
+go build -o ../cmd/app
+```
+
+## Others
+
+Update dependencies
+
+```
+go mod vendor
 ```
 
 ## Reference
@@ -27,11 +42,14 @@ deploy
 * https://gist.github.com/amazingandyyy/60edaede96fef0bc5524c01cb5a7f92b
 * https://gist.github.com/riandyrn/d8d624aa59f66ae2d29717fdece1e558
 
-structure
+project structure
+* https://github.com/golang-standards/project-layout
+* https://www.mindinventory.com/blog/golang-project-structure/
 * https://qiita.com/shiei_kawa/items/eddf48287455380f618f
 * https://qiita.com/unokun/items/dcf3ed4fbc4f532f664a
 
 tooling
+* https://blog.logrocket.com/how-to-build-a-rest-api-with-golang-using-gin-and-gorm/
 * https://github.com/moovweb/gvm
 
 docker
