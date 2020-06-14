@@ -1,8 +1,8 @@
 package main
 
 import (
-    "github.com/gin-gonic/gin"
     "github.com/nnishimura/hippoboard/api/app/models"
+    "github.com/gin-gonic/gin"
     _ "github.com/joho/godotenv/autoload"
 )
 
