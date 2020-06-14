@@ -2,6 +2,7 @@ package models
 
 import (
   "os"
+  "fmt"
   "github.com/jinzhu/gorm"
   _ "github.com/jinzhu/gorm/dialects/postgres"
 )
@@ -9,19 +10,20 @@ import (
 var DB *gorm.DB
 
 func ConnectDataBase() {
-  dbName := os.Getenv("DB_NAME")
   dbHost := os.Getenv("DB_HOST")
-  dbUser := os.Getenv("DB_USER")
-  dbPassword := os.Getenv("DB_PASSWORD")
   dbPort := os.Getenv("DB_PORT")
+  dbUser := os.Getenv("DB_USER")
+  dbName := os.Getenv("DB_NAME")
+  dbPassword := os.Getenv("DB_PASSWORD")
+  connection := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable", dbHost, dbPort, dbUser, dbName, dbPassword)
 
-  db, err := gorm.Open("postgres", "host={{ dbHost }} port={{ dbPort }} user={{ dbUser }} dbname={{ dbName }} password={{ dbPassword }}")
+  db, err := gorm.Open("postgres", connection)
 
   if err != nil {
-    panic("Failed to connect to database!")
+    panic(err)
   }
 
-  database.AutoMigrate(&Task{})
+  db.AutoMigrate(&Ticket{})
 
-  DB = database
+  DB = db
 }

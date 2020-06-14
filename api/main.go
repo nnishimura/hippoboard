@@ -1,7 +1,8 @@
 package main
 
 import (
-    "github.com/nnishimura/hippoboard/api/app/models"
+    "hippoboard/models"
+    "hippoboard/controllers"
     "github.com/gin-gonic/gin"
     _ "github.com/joho/godotenv/autoload"
 )
@@ -9,7 +10,7 @@ import (
 func main() {
     router := gin.Default()
 
-    models.ConnectDatabase()
+    models.ConnectDataBase()
 
     router.GET("/ping", func(c *gin.Context) {
         c.JSON(200, gin.H{

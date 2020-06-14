@@ -1,6 +1,9 @@
+package controllers
+
 import (
+  "net/http"
   "github.com/gin-gonic/gin"
-  "github.com/nnishimura/hippoboard/api/app/models"
+  "hippoboard/models"
 )
 
 func FindTickets(c *gin.Context) {

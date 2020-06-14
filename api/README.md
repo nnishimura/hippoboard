@@ -26,7 +26,7 @@ go get
 
 ```
 cd app
-go build -o ../cmd/app
+go build -o ./cmd/hippoboard
 ```
 
 ## Others
